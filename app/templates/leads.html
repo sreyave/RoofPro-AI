@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leads – RoofPro AI</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --slate-900:#111827;
+      --slate-800:#1e2f47;
+      --slate-50:#f4f7fb;
+
+      --amber:#e07c3a;
+      --amber-hover:#c9692a;
+
+      --white:#fff;
+      --text:#1a2332;
+      --muted:#5d7899;
+      --border:#dde3eb;
+
+      --font-brand:'Playfair Display', serif;
+      --font-body:'DM Sans', sans-serif;
+
+      --shadow-sm:0 1px 4px rgba(17,24,39,0.06);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family:var(--font-body);
+      background:var(--slate-50);
+      color:var(--text);
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background:var(--slate-800);
+      color:#fff;
+      padding:16px 28px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:3px solid var(--amber);
+    }
+
+    .brand {
+      font-family:var(--font-brand);
+      font-size:1.2rem;
+    }
+
+    .brand span { color:var(--amber); }
+
+    .btn {
+      background:var(--amber);
+      color:#fff;
+      padding:8px 14px;
+      border-radius:8px;
+      text-decoration:none;
+      font-size:0.85rem;
+    }
+
+    .btn:hover { background:var(--amber-hover); }
+
+    /* CONTAINER */
+    .container {
+      max-width:1100px;
+      margin:40px auto;
+      padding:0 20px;
+    }
+
+    h2 {
+      font-family:var(--font-brand);
+      margin-bottom:10px;
+    }
+
+    .subtitle {
+      color:var(--muted);
+      margin-bottom:20px;
+      font-size:0.95rem;
+    }
+
+    /* TOOLBAR */
+    .toolbar {
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:15px;
+    }
+
+    input, select {
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      font-size:0.9rem;
+      outline:none;
+    }
+
+    input:focus, select:focus {
+      border-color:var(--amber);
+      box-shadow:0 0 0 3px rgba(224,124,58,0.15);
+    }
+
+    .export-btn {
+      background:var(--slate-800);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:10px;
+      text-decoration:none;
+      font-size:0.85rem;
+      display:inline-block;
+    }
+
+    .export-btn:hover {
+      opacity:0.9;
+    }
+
+    /* TABLE */
+    .table-card {
+      background:#fff;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid var(--border);
+    }
+
+    table {
+      width:100%;
+      border-collapse:collapse;
+    }
+
+    th {
+      background:var(--slate-800);
+      color:#fff;
+      padding:14px;
+      text-align:left;
+      font-size:0.9rem;
+    }
+
+    td {
+      padding:14px;
+      border-bottom:1px solid var(--border);
+      font-size:0.9rem;
+    }
+
+    tr:hover { background:#f8fafc; }
+
+    .badge {
+      background:#fdf0e6;
+      color:#c9692a;
+      padding:4px 8px;
+      border-radius:6px;
+      font-size:0.75rem;
+    }
+
+    .hidden { display:none; }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+<div class="navbar">
+  <div class="brand">RoofPro <span>AI</span> Leads</div>
+
+  <div style="display:flex; gap:10px; align-items:center;">
+
+    <!-- HOME BUTTON -->
+    <a href="/" class="btn">🏠 Home</a>
+
+    <!-- DASHBOARD BUTTON -->
+    <a href="/admin/dashboard" class="btn">⬅ Dashboard</a>
+
+  </div>
+</div>
+
+
+  <div class="container">
+
+    <h2>Customer Leads</h2>
+    <div class="subtitle">Search, filter and export all roofing leads</div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+
+      <input type="text" id="searchInput" placeholder="Search name or phone..."/>
+
+      <select id="issueFilter">
+        <option value="">All Issues</option>
+        <option value="leak">Leak</option>
+        <option value="repair">Repair</option>
+        <option value="installation">Installation</option>
+      </select>
+
+      <a href="/admin/export-leads" class="export-btn">⬇ Export CSV</a>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-card">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Issue</th>
+          </tr>
+        </thead>
+
+        <tbody id="leadsTable">
+
+          {% for lead in leads %}
+          <tr>
+            <td class="name">{{ lead["Name"] }}</td>
+            <td class="phone">{{ lead["Phone"] }}</td>
+            <td class="issue">{{ lead["Issue"] }}</td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+  <!-- JS: SEARCH + FILTER -->
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const issueFilter = document.getElementById("issueFilter");
+    const rows = document.querySelectorAll("#leadsTable tr");
+
+    function filterTable() {
+      const search = searchInput.value.toLowerCase();
+      const filter = issueFilter.value.toLowerCase();
+
+      rows.forEach(row => {
+        const name = row.querySelector(".name").textContent.toLowerCase();
+        const phone = row.querySelector(".phone").textContent.toLowerCase();
+        const issue = row.querySelector(".issue").textContent.toLowerCase();
+
+        const matchSearch = name.includes(search) || phone.includes(search);
+        const matchFilter = filter === "" || issue.includes(filter);
+
+        row.style.display = (matchSearch && matchFilter) ? "" : "none";
+      });
+    }
+
+    searchInput.addEventListener("input", filterTable);
+    issueFilter.addEventListener("change", filterTable);
+  </script>
+
+</body>
+</html>

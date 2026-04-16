@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoofPro Assistant</title>
+  <<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Distinctive font pairing: Playfair Display (brand) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- 🔷 NAVBAR -->
+<div class="navbar">
+  <div class="nav-left">
+    RoofPro <span>AI</span> Chatbot
+  </div>
+
+  <div class="nav-right">
+    <a href="/" class="nav-link">🏠 Home</a>
+    <a href="/admin/login" class="nav-link">🔐 Admin</a>
+  </div>
+</div>
+
+
+  <!-- ───────────────────────────────────────────
+       MAIN CHAT WRAPPER
+  ─────────────────────────────────────────────── -->
+  <div class="chat-wrapper">
+
+    <!-- ── HEADER ── -->
+    <header class="chat-header">
+      <div class="header-left">
+        <div class="avatar-ring">
+          <div class="avatar-icon">
+            <!-- Roof SVG icon -->
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 16 L16 5 L28 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7 14 L7 27 L25 27 L25 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="13" y="19" width="6" height="8" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <span class="online-dot"></span>
+        </div>
+        <div class="header-info">
+          <h1 class="brand-name">RoofPro</h1>
+          <span class="status-text">AI Assistant · Online</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="header-btn" title="Minimize" aria-label="Minimize chat">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ── MESSAGES AREA ── -->
+    <main class="chat-messages" id="chatMessages" role="log" aria-live="polite" aria-label="Chat messages">
+      <!-- Messages injected by script.js -->
+    </main>
+
+    <!-- ── TYPING INDICATOR (hidden by default) ── -->
+    <div class="typing-indicator" id="typingIndicator" aria-label="Assistant is typing">
+      <div class="typing-avatar">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="14" height="14">
+          <path d="M4 16 L16 5 L28 16" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7 14 L7 27 L25 27 L25 14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="typing-dots">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <!-- ── INPUT AREA ── -->
+    <footer class="chat-input-area">
+      <div class="input-container">
+        <textarea
+          id="messageInput"
+          class="message-input"
+          placeholder="Type a message or choose an option…"
+          rows="1"
+          maxlength="500"
+          aria-label="Message input"
+        ></textarea>
+        <button id="sendBtn" class="send-btn" aria-label="Send message">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 2L11 13" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <p class="input-hint">Press <kbd>Enter</kbd> to send · <kbd>Shift+Enter</kbd> for new line</p>
+    </footer>
+
+  </div><!-- /chat-wrapper -->
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
