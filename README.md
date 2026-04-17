@@ -1,10 +1,20 @@
 # 🏠 RoofPro AI – Smart Roofing Assistant
 
-🚀 **RoofPro AI** is an intelligent, production-ready AI chatbot designed for roofing businesses. It provides real-time assistance for customer queries, emergency guidance, and cost estimation—while automatically capturing leads for business growth.
+<p align="center">
+  <a href="https://roofpro-ai.onrender.com">
+    <img src="https://img.shields.io/badge/🚀 Live Demo-Visit-green?style=for-the-badge">
+  </a>
+  <a href="https://github.com/sreyave/RoofPro-AI">
+    <img src="https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge">
+  </a>
+</p>
+
+🚀 **RoofPro AI** is an intelligent, production-ready AI chatbot designed for roofing businesses. It provides real-time assistance for customer queries, emergency guidance, and cost estimation — while automatically capturing leads for business growth.
 
 Built using **Flask + OpenAI + RAG (Retrieval-Augmented Generation)**, this project demonstrates how to combine AI with real-world business workflows.
 
 ---
+
 
 ## ✨ Features
 
