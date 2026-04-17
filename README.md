@@ -5,7 +5,7 @@
     <img src="https://img.shields.io/badge/🚀 Live Demo-Visit-green?style=for-the-badge">
   </a>
   <a href="https://github.com/sreyave/RoofPro-AI">
-    <img src="https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge">
+    <img src="https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge">
   </a>
 </p>
 
